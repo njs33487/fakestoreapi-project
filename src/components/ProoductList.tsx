@@ -1,10 +1,12 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import { Product } from "./types";
 
+interface ProductListProps {
+  onProductSelect: (productId: number) => void;
+}
 
-
-const ProductList: React.FC = () => {
+const ProductList = ({onProductSelect}: ProductListProps) => {
   const [products, setProducts] = useState<Product[]>([]);
 
   useEffect(() => {
@@ -28,7 +30,7 @@ const ProductList: React.FC = () => {
           <h2>{product.title}</h2>
           <p>${product.price.toFixed(2)}</p>
           <img src={product.image} alt={product.title} />
-          <button></button>
+          <button onClick={() =>onProductSelect }>see more</button>
         </div>
       ))}
     </div>
