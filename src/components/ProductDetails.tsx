@@ -6,7 +6,7 @@ interface ProductDetailProps {
   productId: number;
 }
 
-export const ProductDetail = ({ productId }: ProductDetailProps) => {
+export const ProductDetails = ({ productId }: ProductDetailProps) => {
   const [product, setProduct] = useState<Product | null>(null);
 
   useEffect(() => {
