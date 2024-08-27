@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Product } from "../../../types/types";
 import { ProductService } from "../../../api/services/ProductService";
-import styles from '.\modues\ProductList.module.css'
+import styles from './ProductList.module.css';
 
 interface ProductListProps {
   onProductSelect: (productId: number) => void;
