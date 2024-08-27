@@ -9,6 +9,7 @@ export interface Product {
 
 
 export interface CartItem extends Product {
+  product: any;
   quantity: number;
 }
 

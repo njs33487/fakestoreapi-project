@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { Product } from "./types";
-import { ProductService } from "../services/ProductService";
+import { Product } from "../../../types/types";
+import { ProductService } from "../../../api/services/ProductService";
 
 interface ProductDetailProps {
   productId: number;

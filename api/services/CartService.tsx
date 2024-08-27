@@ -1,4 +1,4 @@
-import { Product } from "../components/types";
+import { Product } from "../../types/types";
 
 export interface CartItem {
   product: Product;

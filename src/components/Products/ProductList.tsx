@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
-import axios from "axios";
-import { Product } from "./types";
+import { Product } from "../../../types/types";
+import { ProductService } from "../../../api/services/ProductService";
 
 interface ProductListProps {
   onProductSelect: (productId: number) => void;
@@ -12,10 +12,8 @@ const ProductList = ({onProductSelect}: ProductListProps) => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await axios.get<Product[]>(
-          "https://fakestoreapi.com/products"
-        );
-        setProducts(response.data);
+        const data = await ProductService.getProducts();
+        setProducts(data);
       } catch (error) {
         console.error("Error fetching products:", error);
       }

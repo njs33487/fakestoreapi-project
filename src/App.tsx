@@ -1,4 +1,4 @@
-import { ProductController } from "./components/ProductController";
+import { ProductController } from "./components/Products/ProductController";
 
 const App = () => {
   return (
