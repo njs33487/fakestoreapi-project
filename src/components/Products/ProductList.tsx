@@ -29,7 +29,7 @@ const ProductList = ({onProductSelect}: ProductListProps) => {
           <h2 className={styles.h2}>{product.title}</h2>
           <p className={styles.p}>${product.price.toFixed(2)}</p>
           <img className={styles.img} src={product.image} alt={product.title} />
-          <button className={styles.button} onClick={() =>ProductService.getProductById}>see more</button>
+          <button className={styles.button} onClick={() =>{ProductService.getProductById(product.id)}>see more</button>
         </div>
       ))}
     </div>
