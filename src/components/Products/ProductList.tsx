@@ -7,9 +7,11 @@ import styles from "./ProductList.module.css";
 const ProductList = () => {
   const navigate = useNavigate();
 
-  const handleViewDetials = (id: number) => {
+   const handleViewDetials = (id: number) => {
     navigate(`/product/${id}`);
   };
+  
+
 
   const [products, setProducts] = useState<Product[]>([]);
 

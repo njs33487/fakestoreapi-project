@@ -1,0 +1,23 @@
+.navbar{
+width: 100%;
+background-color: #007bff;
+color: #fff;
+padding: 10px 20px;
+display: flex;
+justify-content: space-between;
+align-items: center;
+}
+
+.navbarTitle{
+font-size: 1.5em;
+font-weight: bold;
+}
+
+.navbarLinks{
+display: flex;
+gap: 15px;
+}
+.navbarLink{
+color: #fff;
+font-size: 1em;
+}
