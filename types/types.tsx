@@ -1,4 +1,5 @@
 export interface Product {
+  data(data: any): void | PromiseLike<void>;
   id: number;
   title: string;
   price: number;

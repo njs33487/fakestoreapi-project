@@ -1,5 +1,4 @@
 import Navbar from "./components/Navbar/Navbar";
-import Footer from "./components/Footer/Footer";
 import ProductList from "./components/Products/ProductList";
 import { Cart } from "./components/Cart";
 import { Checkout } from "./components/Checkout";
@@ -15,7 +14,6 @@ const App = () => {
         <Route path="/checkout" Component={Checkout}/>
       </Routes>
     </Router>
-    < Footer />
     </>
   );
 };
