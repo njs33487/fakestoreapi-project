@@ -1,14 +1,17 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { Product } from "../../../types/types";
 import { ProductService } from "../../../api/services/ProductService";
-import styles from './ProductList.module.css';
-import { ProductDetails } from "./ProductDetails";
+import styles from "./ProductList.module.css";
 
-interface ProductListProps {
-  onProductSelect: (productId: number) => <ProductDetails />
-}
+const ProductList = () => {
+  const navigate = useNavigate();
 
-const ProductList = ({onProductSelect}: ProductListProps) => {
+   const handleViewDetials = (id: number) => {
+    navigate(`/product/${id}`);
+  };
+  
+
 
   const [products, setProducts] = useState<Product[]>([]);
 
@@ -25,13 +28,24 @@ const ProductList = ({onProductSelect}: ProductListProps) => {
   }, []);
 
   return (
-    <div className="product-list">
+    <div className={styles.productGrid}>
       {products.map((product) => (
-        <div key={product.id} className={styles.div}>
-          <h2 className={styles.h2}>{product.title}</h2>
-          <p className={styles.p}>${product.price.toFixed(2)}</p>
-          <img className={styles.img} src={product.image} alt={product.title} />
-          <button className={styles.button} onClick={() =>onProductSelect }>see more</button>
+        <div key={product.id} className={styles.card}>
+          <img
+            className={styles.cardImage}
+            src={product.image}
+            alt={product.title}
+          />
+          <div className={styles.cardContent}>
+            <h2 className={styles.cardTitle}>{product.title}</h2>
+            <p className={styles.cardPrice}>${product.price.toFixed(2)}</p>
+            <button
+              className={styles.cardButton}
+              onClick={() => handleViewDetials(product.id)}
+            >
+              View Details
+            </button>
+          </div>
         </div>
       ))}
     </div>
