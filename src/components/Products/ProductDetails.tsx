@@ -1,13 +1,10 @@
 import { useEffect, useState } from "react";
 import { Product } from "../../../types/types";
 import { ProductService } from "../../../api/services/ProductService";
-import { CartService } from "../../../api/services/CartService";
+import { useParams } from "react-router-dom";
 
-interface ProductDetailProps {
-  productId: number;
-}
-
-export const ProductDetails = ({ productId }: ProductDetailProps) => {
+export const ProductDetails = (productId: number) => {
+  const { id } = useParams();
   const [product, setProduct] = useState<Product | null>(null);
 
   useEffect(() => {
@@ -16,14 +13,14 @@ export const ProductDetails = ({ productId }: ProductDetailProps) => {
       setProduct(data);
     };
     fetchProduct();
-  }, [productId]);
+  }, [id, productId]);
   if (!product) return <div>Loading...</div>;
 
   return (
     <>
       <p>{product.description}</p>
       <p>Price: ${product.price.toFixed(2)}</p>
-      <button onClick={() => CartService.addToCart}>Add to Cart</button>
+      <button>Add to Cart</button>
     </>
   );
 };
