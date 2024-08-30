@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Product } from "../../../types/types";
 import { ProductService } from "../../../api/services/ProductService";
+import { CartService } from "../../../api/services/CartService";
 
 interface ProductDetailProps {
   productId: number;
@@ -20,11 +21,9 @@ export const ProductDetails = ({ productId }: ProductDetailProps) => {
 
   return (
     <>
-      <h3>{product.title}</h3>
-      <img src={product.image} alt={product.title} />
       <p>{product.description}</p>
       <p>Price: ${product.price.toFixed(2)}</p>
-      <button>Add to Cart</button>
+      <button onClick={() => CartService.addToCart}>Add to Cart</button>
     </>
   );
 };

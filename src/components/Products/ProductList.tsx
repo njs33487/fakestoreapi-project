@@ -1,10 +1,15 @@
 import { useState, useEffect } from "react";
 import { Product } from "../../../types/types";
 import { ProductService } from "../../../api/services/ProductService";
-import styles from "./ProductList.module.css";
+import styles from './ProductList.module.css';
+import { ProductDetails } from "./ProductDetails";
 
+interface ProductListProps {
+  onProductSelect: (productId: number) => <ProductDetails />
+}
 
-const ProductList = () => {
+const ProductList = ({onProductSelect}: ProductListProps) => {
+
   const [products, setProducts] = useState<Product[]>([]);
 
   useEffect(() => {
@@ -26,14 +31,7 @@ const ProductList = () => {
           <h2 className={styles.h2}>{product.title}</h2>
           <p className={styles.p}>${product.price.toFixed(2)}</p>
           <img className={styles.img} src={product.image} alt={product.title} />
-          <button
-            className={styles.button}
-            onClick={() => {
-              ProductService.getProductById(product.id);
-            }}
-          >
-            see more
-          </button>
+          <button className={styles.button} onClick={() =>onProductSelect }>see more</button>
         </div>
       ))}
     </div>
