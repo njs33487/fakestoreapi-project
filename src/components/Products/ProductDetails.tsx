@@ -1,16 +1,16 @@
 import { useEffect, useState } from "react";
 import { Product } from "../../../types/types";
-import { ProductService } from "../../../api/services/ProductService";
 import { cartService } from "../../../api/services/CartService";
 import { useParams } from "react-router-dom";
 
 const ProductDetails = () => {
-  const { productId } = useParams();
+  const { productId } = useParams()
   const [product, setProduct] = useState<Product | null>(null);
 
   useEffect(() => {
     const fetchProduct = async () => {
-      const data = await ProductService.getProductById(productId);
+      const response = await fetch(`https://fakestoreapi.com/products/${productId}`);
+      const data = await response.json();
       setProduct(data);
     };
     fetchProduct();
