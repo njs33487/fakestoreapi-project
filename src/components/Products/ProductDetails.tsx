@@ -2,12 +2,10 @@ import { useEffect, useState } from "react";
 import { Product } from "../../../types/types";
 import { ProductService } from "../../../api/services/ProductService";
 import { cartService } from "../../../api/services/CartService";
+import { useParams } from "react-router-dom";
 
-interface ProductDetailProps {
-  productId: number;
-}
-
-export const ProductDetails = ({ productId }: ProductDetailProps) => {
+const ProductDetails = () => {
+  const { productId } = useParams();
   const [product, setProduct] = useState<Product | null>(null);
 
   useEffect(() => {
@@ -29,3 +27,5 @@ export const ProductDetails = ({ productId }: ProductDetailProps) => {
     </>
   );
 };
+
+export default ProductDetails;
