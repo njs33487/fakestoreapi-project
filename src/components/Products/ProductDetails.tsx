@@ -24,20 +24,11 @@ const ProductDetails = () => {
   return (
     <>
       <div key={product.id} className={styles.card}>
-        <img
-          className={styles.cardImage}
-          src={product.image}
-          alt={product.title}
-        />
-        <div className={styles.cardContent}>
-          <h2 className={styles.cardTitle}>{product.title}</h2>
-          <p className={styles.cardPrice}>${product.price.toFixed(2)}</p>
-          <p>{product.description}</p>
+      <p>{product.description}</p>
           <button onClick={() => cartService.addToCart(product)}>
             Add to Cart
           </button>
         </div>
-      </div>
     </>
   );
 };
