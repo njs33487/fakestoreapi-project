@@ -4,7 +4,7 @@ import styles from "./productList.module.css";
 
 import { cartService } from "../../../api/services/CartService";
 
-const ProductDetails = ({ productId }: {productId: number}) => {
+const ProductDetails = ({ productId }: { productId: number }) => {
   const [product, setProduct] = useState<Product | null>(null);
 
   useEffect(() => {
@@ -30,8 +30,11 @@ const ProductDetails = ({ productId }: {productId: number}) => {
         <div className={styles.cardContent}>
           <h2 className={styles.cardTitle}>{product.title}</h2>
           <p className={styles.cardPrice}>${product.price.toFixed(2)}</p>
-          <p>{product.description}</p>
-          <button onClick={() => cartService.addToCart(product)}>
+          <p className={styles.cardTitle}>{product.description}</p>
+          <button
+            className={styles.cardButton}
+            onClick={() => cartService.addToCart(product)}
+          >
             Add to Cart
           </button>
         </div>
