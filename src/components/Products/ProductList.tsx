@@ -1,13 +1,14 @@
 import { useState, useEffect } from "react";
 import { Product } from "../../../types/types";
 import { ProductService } from "../../../api/services/ProductService";
-import { Link } from "react-router-dom";
 import styles from './ProductList.module.css';
+import ProductDetails from "./ProductDetails";
 
 
 const ProductList = () => {
 
   const [products, setProducts] = useState<Product[]>([]);
+  const [selectedProduct , setSelectedProduct] = useState<number | null>(null);
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -21,6 +22,10 @@ const ProductList = () => {
     fetchProducts();
   }, []);
 
+  const handleProductClick = (productId : number) =>{
+    setSelectedProduct(productId);
+  };
+
   return (
     <div className={styles.productGrid}>
       {products.map((product) => (
@@ -29,13 +34,12 @@ const ProductList = () => {
           <div className={styles.cardContent}>
           <h2 className={styles.cardTitle}>{product.title}</h2>
           <p className={styles.cardPrice}>${product.price.toFixed(2)}</p>
-          <Link to={`./product/${product.id}`}>
-        <button className={styles.cardButton}> View details</button>
-          </Link>
+        <button onClick={() => handleProductClick(product.id)} className={styles.cardButton}> View details</button>
           </div>
+          </div>
+        ))}
+          {selectedProduct && <ProductDetails productId={selectedProduct} />}
         </div>
-      ))}
-    </div>
   );
 };
 

@@ -3,10 +3,8 @@ import { Product } from "../../../types/types";
 import styles from "./productList.module.css";
 
 import { cartService } from "../../../api/services/CartService";
-import { useParams } from "react-router-dom";
 
-const ProductDetails = () => {
-  const { productId } = useParams();
+const ProductDetails = ({ productId }: {productId: number}) => {
   const [product, setProduct] = useState<Product | null>(null);
 
   useEffect(() => {
@@ -24,11 +22,20 @@ const ProductDetails = () => {
   return (
     <>
       <div key={product.id} className={styles.card}>
-      <p>{product.description}</p>
+        <img
+          className={styles.cardImage}
+          src={product.image}
+          alt={product.title}
+        />
+        <div className={styles.cardContent}>
+          <h2 className={styles.cardTitle}>{product.title}</h2>
+          <p className={styles.cardPrice}>${product.price.toFixed(2)}</p>
+          <p>{product.description}</p>
           <button onClick={() => cartService.addToCart(product)}>
             Add to Cart
           </button>
         </div>
+      </div>
     </>
   );
 };
