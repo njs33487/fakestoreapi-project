@@ -32,18 +32,15 @@ const ProductList = () => {
             className={styles.cardImage}
             src={product.image}
             alt={product.title}
-            />
+          ></img>
           <div className={styles.cardContent}>
             <h2 className={styles.cardTitle}>{product.title}</h2>
             <p className={styles.cardPrice}>${product.price.toFixed(2)}</p>
             <button
               onClick={() => handleProductClick(product.id)}
               className={styles.cardButton}
-              >
-              {" "}
-              View details
-            </button>
-          {selectedProduct && <ProductDetails productId={selectedProduct} />}
+            >View details</button>
+            {selectedProduct && <ProductDetails productId={selectedProduct} />}
           </div>
         </div>
       ))}
