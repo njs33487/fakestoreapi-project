@@ -1,4 +1,6 @@
 export interface Product {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  data(data: any): void | PromiseLike<void>;
   id: number;
   title: string;
   price: number;
@@ -9,6 +11,7 @@ export interface Product {
 
 
 export interface CartItem extends Product {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   product: any;
   quantity: number;
 }

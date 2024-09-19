@@ -1,19 +1,12 @@
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 import { Product } from "../../../types/types";
 import { ProductService } from "../../../api/services/ProductService";
 import styles from "./ProductList.module.css";
+import ProductDetails from "./ProductDetails";
 
 const ProductList = () => {
-  const navigate = useNavigate();
-
-   const handleViewDetials = (id: number) => {
-    navigate(`/product/${id}`);
-  };
-  
-
-
   const [products, setProducts] = useState<Product[]>([]);
+  const [selectedProduct, setSelectedProduct] = useState<number | null>(null);
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -27,6 +20,10 @@ const ProductList = () => {
     fetchProducts();
   }, []);
 
+  const handleProductClick = (productId: number) => {
+    setSelectedProduct(productId);
+  };
+
   return (
     <div className={styles.productGrid}>
       {products.map((product) => (
@@ -35,16 +32,15 @@ const ProductList = () => {
             className={styles.cardImage}
             src={product.image}
             alt={product.title}
-          />
+          ></img>
           <div className={styles.cardContent}>
             <h2 className={styles.cardTitle}>{product.title}</h2>
             <p className={styles.cardPrice}>${product.price.toFixed(2)}</p>
             <button
+              onClick={() => handleProductClick(product.id)}
               className={styles.cardButton}
-              onClick={() => handleViewDetials(product.id)}
-            >
-              View Details
-            </button>
+            >View details</button>
+            {selectedProduct && <ProductDetails productId={selectedProduct} />}
           </div>
         </div>
       ))}

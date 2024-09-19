@@ -1,18 +1,18 @@
 import { useEffect, useState } from "react";
 import { Product } from "../../../types/types";
-import { ProductService } from "../../../api/services/ProductService";
-import { CartService } from "../../../api/services/CartService";
+import styles from "./productList.module.css";
 
-interface ProductDetailProps {
-  productId: number;
-}
+import { cartService } from "../../../api/services/CartService";
 
-export const ProductDetails = ({ productId }: ProductDetailProps) => {
+const ProductDetails = ({ productId }: { productId: number }) => {
   const [product, setProduct] = useState<Product | null>(null);
 
   useEffect(() => {
     const fetchProduct = async () => {
-      const data = await ProductService.getProductById(productId);
+      const response = await fetch(
+        `https://fakestoreapi.com/products/${productId}`
+      );
+      const data = await response.json();
       setProduct(data);
     };
     fetchProduct();
@@ -21,9 +21,26 @@ export const ProductDetails = ({ productId }: ProductDetailProps) => {
 
   return (
     <>
-      <p>{product.description}</p>
-      <p>Price: ${product.price.toFixed(2)}</p>
-      <button onClick={() => CartService.addToCart}>Add to Cart</button>
+      <div key={product.id} className={styles.card}>
+        <img
+          className={styles.cardImage}
+          src={product.image}
+          alt={product.title}
+        />
+        <div className={styles.cardContent}>
+          <h2 className={styles.cardTitle}>{product.title}</h2>
+          <p className={styles.cardPrice}>${product.price.toFixed(2)}</p>
+          <p className={styles.cardTitle}>{product.description}</p>
+          <button
+            className={styles.cardButton}
+            onClick={() => cartService.addToCart(product)}
+          >
+            Add to Cart
+          </button>
+        </div>
+      </div>
     </>
   );
 };
+
+export default ProductDetails;
